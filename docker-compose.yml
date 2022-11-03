@@ -18,3 +18,9 @@ services:
     image: containous/whoami
     ports:
       - "5002:80"
+
+  # backend server3
+  whoami2:
+    image: containous/whoami
+    ports:
+      - "5003:80"
