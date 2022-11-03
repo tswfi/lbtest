@@ -3,19 +3,26 @@
 set -euo pipefail
 
 # do 10 requests with one header and printout which instance replied
+username="UsernameB64"
+echo "first test batch, username: ${username}"
 for i in {1..10}
 do
-  curl -s -X POST --header "Authorization: Bearer syt_UsernameB64_rndBase64_chksumB64" 'http://localhost:8080/' |grep 'Hostname'
+  curl -v -X POST --header "Authorization: Bearer syt_${username}_rndBase64_chksumB64" 'http://localhost:8080/' 2>&1 | grep '< X-'
 done
+echo ""
 
 # and 10 more with data changed around the username
-for i in {1..10}
+echo "second test batch, same user, different data around it"
+for j in {1..10}
 do
-  curl -s -X POST --header "Authorization: Bearer syt_UsernameB64_random64_checksum" 'http://localhost:8080/' |grep 'Hostname'
+  curl -v -X POST --header "Authorization: Bearer syt_${username}_rndBase64_chksumB64" 'http://localhost:8080/' 2>&1 | grep '< X-'
 done
+echo ""
 
 # and another 10 with different header
-for i in {1..10}
+username2="OtherUserB64"
+echo "third test batch, another user: ${username2}"
+for x in {1..10}
 do
-  curl -s -X POST --header "Authorization: Bearer syt_AnotherB64_rndBase64_chksumB64" 'http://localhost:8080/' |grep 'Hostname'
+  curl -v -X POST --header "Authorization: Bearer syt_${username2}_rndBase64_chksumB64" 'http://localhost:8080/' 2>&1 | grep '< X-'
 done
