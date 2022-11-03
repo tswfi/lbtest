@@ -39,7 +39,7 @@ done
 echo "fifth test batch, noncompliant different header on every test"
 for x in {1..10}
 do
-  noncompliant=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w 20 | head -n 1)
+  noncompliant=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 13 ; echo '')
   echo "Noncompliant random header: ${noncompliant}"
   curl -v -X POST --header "Authorization: Bearer ${noncompliant}" 'http://localhost:8080/' 2>&1 | grep '< X-'
 done
