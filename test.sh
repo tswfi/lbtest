@@ -15,7 +15,7 @@ echo ""
 echo "second test batch, same user, different data around it"
 for j in {1..10}
 do
-  curl -v -X POST --header "Authorization: Bearer syt_${username}_rndBase64_chksumB64" 'http://localhost:8080/' 2>&1 | grep '< X-'
+  curl -v -X POST --header "Authorization: Bearer syt_${username}_otherbase64_differentB64" 'http://localhost:8080/' 2>&1 | grep '< X-'
 done
 echo ""
 
