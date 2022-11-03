@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  # Load balancer. check the config in nginx folder
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+
+  # backend server1
+  whoami1:
+    image: containous/whoami
+    ports:
+      - "5001:80"
+
+  # backend server2
+  whoami2:
+    image: containous/whoami
+    ports:
+      - "5002:80"
