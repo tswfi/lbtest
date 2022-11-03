@@ -19,3 +19,9 @@ for i in {1..10}
 do
   curl -s -X POST --header "Authorization: Bearer syt_AnotherB64_rndBase64_chksumB64" 'http://localhost:8080/' |grep 'Hostname'
 done
+
+# and 10 more with noncompliant header
+for i in {1..10}
+do
+  curl -s -X POST --header "Authorization: Bearer randomrandomrandom" 'http://localhost:8080/' |grep 'Hostname'
+done
