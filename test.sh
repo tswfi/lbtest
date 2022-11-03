@@ -26,3 +26,20 @@ for x in {1..10}
 do
   curl -v -X POST --header "Authorization: Bearer syt_${username2}_rndBase64_chksumB64" 'http://localhost:8080/' 2>&1 | grep '< X-'
 done
+
+# and 10 more with noncompliant same header
+noncompliant="RandomRandomRandom"
+echo "fourth test batch, noncompliant header: ${noncompliant}"
+for x in {1..10}
+do
+  curl -v -X POST --header "Authorization: Bearer ${noncompliant}" 'http://localhost:8080/' 2>&1 | grep '< X-'
+done
+
+# and still 10 more with noncompliant different headers
+echo "fifth test batch, noncompliant different header on every test"
+for x in {1..10}
+do
+  noncompliant=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w 20 | head -n 1)
+  echo "Noncompliant random header: ${noncompliant}"
+  curl -v -X POST --header "Authorization: Bearer ${noncompliant}" 'http://localhost:8080/' 2>&1 | grep '< X-'
+done
