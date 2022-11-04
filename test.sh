@@ -43,3 +43,6 @@ do
   echo "Noncompliant random header: ${noncompliant}"
   curl -v -X POST --header "Authorization: Bearer ${noncompliant}" 'http://localhost:8080/' 2>&1 | grep '< X-'
 done
+
+# old way of giving the token as get parameter
+curl -v -X POST 'http://localhost:8080/?token=syt_ASARGS_rndBase64_chksumB64' 2>&1 | grep '< X-'
