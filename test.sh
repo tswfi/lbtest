@@ -43,3 +43,10 @@ do
   echo "Noncompliant random header: ${noncompliant}"
   curl -v -X POST --header "Authorization: Bearer ${noncompliant}" 'http://localhost:8080/' 2>&1 | grep '< X-'
 done
+
+# old way of giving the token as get parameter
+echo "sixth test batch, old way of giving the token as get parameter"
+for x in {1..10}
+do
+  curl -v -X POST 'http://localhost:8080/?access_token=syt_ASARGS_rndBase64_chksumB64' 2>&1 | grep '< X-'
+done
