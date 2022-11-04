@@ -45,4 +45,8 @@ do
 done
 
 # old way of giving the token as get parameter
-curl -v -X POST 'http://localhost:8080/?token=syt_ASARGS_rndBase64_chksumB64' 2>&1 | grep '< X-'
+echo "sixth test batch, old way of giving the token as get parameter"
+for x in {1..10}
+do
+  curl -v -X POST 'http://localhost:8080/?token=syt_ASARGS_rndBase64_chksumB64' 2>&1 | grep '< X-'
+done
